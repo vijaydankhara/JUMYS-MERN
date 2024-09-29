@@ -1,17 +1,42 @@
 import React, { useState } from "react";
 import Weblogo from "../assets/asset0.svg";
-import { NavLink, Outlet, useNavigate } from "react-router-dom"; // Added useNavigate
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { FaGripVertical } from "react-icons/fa";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import IconBar from "./icone";
 import "./Navbar.css";
-import { FaGripVertical, FaHeart, FaSearch, FaUser } from "react-icons/fa";
 
 const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const navigate = useNavigate(); 
+  const [activeMenu, setActiveMenu] = useState({
+    mobile: false,
+    home: false,
+    shop: false,
+    products: false,
+    blog: false,
+    page: false,
+    admin: false,
+  });
+  const navigate = useNavigate();
 
-  
   const toggleMenu = (menu) => {
-    setActiveMenu((prevMenu) => (prevMenu === menu ? null : menu));
+    setActiveMenu((prevMenu) => ({
+      ...prevMenu,
+      [menu]: !prevMenu[menu],
+    }));
+  };
+
+  const closeAllMenus = () => {
+    setActiveMenu({
+      mobile: false,
+      home: false,
+      shop: false,
+      products: false,
+      blog: false,
+      page: false,
+      admin: false,
+    });
   };
 
   return (
@@ -29,16 +54,21 @@ const Navbar = () => {
             </div>
             <button
               className="flex items-center rtl:space-x-reverse"
-              onClick={() => navigate("/")} // Navigate to home
+              onClick={() => navigate("/")}
             >
-              <img id="logo" className="size-24" src={Weblogo} alt="Not Found" />
+              <img
+                id="logo"
+                className="size-24"
+                src={Weblogo}
+                alt="Not Found"
+              />
             </button>
             <div className="hidden md:flex space-x-16" id="toggle">
               {/* Home menu */}
               <div
                 className="relative"
                 onMouseEnter={() => toggleMenu("home")}
-                onMouseLeave={() => toggleMenu(null)}
+                onMouseLeave={() => toggleMenu("home")}
               >
                 <button className="NavbatTxt" onClick={() => navigate("/")}>
                   Home
@@ -49,38 +79,34 @@ const Navbar = () => {
               <div
                 className="relative"
                 onMouseEnter={() => toggleMenu("shop")}
-                onMouseLeave={() => toggleMenu(null)}
+                onMouseLeave={() => toggleMenu("shop")}
               >
                 <button className="NavbatTxt">Shop &#11163;</button>
-                {activeMenu === "shop" && (
-                  <ul className="absolute left-0  w-48 bg-white text-[#000000] shadow-lg rounded-md overflow-hidden">
+                {activeMenu.shop && (
+                  <ul className="absolute left-0 w-48 bg-white text-[#000000] shadow-lg rounded-md overflow-hidden">
                     <li>
                       <NavLink
                         to="/shopList"
                         className="shop"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Shop List
                       </NavLink>
                     </li>
-<<<<<<< HEAD
                     <li>
                       <NavLink
                         to="/databaseProduct"
                         className="shop"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Fav Product
                       </NavLink>
                     </li>
-=======
-                  
->>>>>>> 28e2dc80cd72811340d22d9283e4707c8e614441
                     <li>
                       <NavLink
                         to="/wishlist"
                         className="page"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Wishlist
                       </NavLink>
@@ -93,7 +119,7 @@ const Navbar = () => {
               <div
                 className="relative"
                 onMouseEnter={() => toggleMenu("products")}
-                onMouseLeave={() => toggleMenu(null)}
+                onMouseLeave={() => toggleMenu("products")}
               >
                 <button
                   className="NavbatTxt"
@@ -107,7 +133,7 @@ const Navbar = () => {
               <div
                 className="relative"
                 onMouseEnter={() => toggleMenu("blog")}
-                onMouseLeave={() => toggleMenu(null)}
+                onMouseLeave={() => toggleMenu("blog")}
               >
                 <button className="NavbatTxt" onClick={() => navigate("/blog")}>
                   Blog
@@ -118,16 +144,16 @@ const Navbar = () => {
               <div
                 className="relative"
                 onMouseEnter={() => toggleMenu("page")}
-                onMouseLeave={() => toggleMenu(null)}
+                onMouseLeave={() => toggleMenu("page")}
               >
                 <button className="NavbatTxt">Page &#11163;</button>
-                {activeMenu === "page" && (
+                {activeMenu.page && (
                   <ul className="absolute left-0 w-48 bg-white text-[#000000] shadow-lg rounded-md overflow-hidden">
                     <li>
                       <NavLink
                         to="/aboutUs"
                         className="page"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         About Us
                       </NavLink>
@@ -136,7 +162,7 @@ const Navbar = () => {
                       <NavLink
                         to="/contact"
                         className="page"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Contact
                       </NavLink>
@@ -145,7 +171,7 @@ const Navbar = () => {
                       <NavLink
                         to="/faq2"
                         className="page"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Faq 2
                       </NavLink>
@@ -154,7 +180,7 @@ const Navbar = () => {
                       <NavLink
                         to="/page404"
                         className="page"
-                        onClick={() => toggleMenu(null)}
+                        onClick={closeAllMenus}
                       >
                         Page 404
                       </NavLink>
@@ -163,7 +189,27 @@ const Navbar = () => {
                 )}
               </div>
 
-              
+              {/* Admin menu */}
+              <div
+                className="relative"
+                onMouseEnter={() => toggleMenu("admin")}
+                onMouseLeave={() => toggleMenu("admin")}
+              >
+                <button className="NavbatTxt">Admin &#11163;</button>
+                {activeMenu.admin && (
+                  <ul className="absolute left-0 w-48 bg-white text-[#000000] shadow-lg rounded-md overflow-hidden">
+                    <li>
+                      <NavLink
+                        to="/admindata"
+                        className="page"
+                        onClick={closeAllMenus}
+                      >
+                        AdminData
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
+              </div>
             </div>
 
             {/* Icons bar */}
@@ -173,33 +219,33 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu */}
-          {activeMenu === "mobile" && (
+          {activeMenu.mobile && (
             <ul
               id="toggelmenuTop"
               className="bg-[#ffffff] text-black text-xl font-bold space-y-4 py-4 px-4 w-full"
             >
               <li>
-                <NavLink to="/" onClick={() => toggleMenu(null)}>
+                <NavLink to="/" onClick={closeAllMenus}>
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/shop" onClick={() => toggleMenu(null)}>
+                <NavLink to="/shop" onClick={closeAllMenus}>
                   Shop
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/product" onClick={() => toggleMenu(null)}>
+                <NavLink to="/product" onClick={closeAllMenus}>
                   Products
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/blog" onClick={() => toggleMenu(null)}>
+                <NavLink to="/blog" onClick={closeAllMenus}>
                   Blog
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/page" onClick={() => toggleMenu(null)}>
+                <NavLink to="/page" onClick={closeAllMenus}>
                   Page
                 </NavLink>
               </li>
@@ -212,22 +258,37 @@ const Navbar = () => {
           className="w-full justify-evenly flex fixed bg-white h-16 bottom-0"
           id="toggelHiden"
         >
-          <a className="w-24 h-full flex flex-col justify-center items-center">
-            <FaGripVertical />
+          <NavLink
+            to="/shopList"
+            className="w-24 h-full flex flex-col justify-center items-center"
+          >
+            <FaGripVertical className="iconeNav" />
             Shop
-          </a>
-          <a className="w-24 h-full flex flex-col justify-center items-center">
-            <FaUser />
-            Account
-          </a>
-          <a className="w-24 h-full flex flex-col justify-center items-center">
-            <FaSearch />
-            Search
-          </a>
-          <a className="w-24 h-full flex flex-col justify-center items-center">
-            <FaHeart />
+          </NavLink>
+
+          <NavLink
+            to="/addtocart"
+            className="w-24 h-full flex flex-col justify-center items-center"
+          >
+            <FontAwesomeIcon icon={faShoppingBasket} className="iconeNav" />
+            Cart
+          </NavLink>
+
+          <NavLink
+            to="/login"
+            className="w-24 h-full flex flex-col justify-center items-center"
+          >
+            <FontAwesomeIcon icon={faRightToBracket} className="iconeNav" />
+            Login
+          </NavLink>
+
+          <NavLink
+            to="/addtowishlist"
+            className="w-24 h-full flex flex-col justify-center items-center"
+          >
+            <FontAwesomeIcon icon={faHeart} className="iconeNav" />
             Wishlist
-          </a>
+          </NavLink>
         </div>
       </div>
       <Outlet />

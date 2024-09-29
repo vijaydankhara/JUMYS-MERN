@@ -21,16 +21,16 @@ const ProductCardProductList = () => {
   };
 
   return (
-    <div className="flex flex-row w-full  p-4 rounded-lg ">
+    <div className="flex flex-col md:flex-row w-full p-4 rounded-lg">
       <div
-        className="relative w-full md:w-1/2 h-64 overflow-hidden"
+        className="relative w-full h-64 md:w-1/2 overflow-hidden"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <img
           src={isHovered ? assets66 : assets67}
           alt="Product"
-          className="w-64 h-64 object-cover transition duration-300"
+          className="w-full h-full object-cover transition duration-300"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 opacity-0 hover:opacity-100 transition duration-300">
           <FaSearch className="text-white text-3xl" />
@@ -51,16 +51,15 @@ const ProductCardProductList = () => {
           <button className="bg-[#000] hover:bg-[#ff0000] duration-500 text-white py-2 px-4 rounded-full flex items-center">
             <FaShoppingCart className="mr-2" /> Add To Cart
           </button>
-          <div className="w-10 h-10 flex border border-t-gray-400  bg-[#fff] hover:bg-[#ff0000]  items-center text-center justify-center rounded-full ml-4 text-xl text-[#ff0000] cursor-pointer hover:text-[#fff] transition duration-500">
+          <div className="w-10 h-10 flex border border-t-gray-400 bg-[#fff] hover:bg-[#ff0000] items-center text-center justify-center rounded-full ml-4 text-xl text-[#ff0000] cursor-pointer hover:text-[#fff] transition duration-500">
             <Heart />
           </div>
-          <div className="w-10 h-10 flex border border-t-gray-400  bg-[#fff] hover:bg-[#ff0000]  items-center text-center justify-center rounded-full ml-4 text-xl text-[#000] cursor-pointer hover:text-[#fff] transition duration-500">
+          <div className="w-10 h-10 flex border border-t-gray-400 bg-[#fff] hover:bg-[#ff0000] items-center text-center justify-center rounded-full ml-4 text-xl text-[#000] cursor-pointer hover:text-[#fff] transition duration-500">
             <FaExchangeAlt />
           </div>
         </div>
         <p className="mt-4 text-gray-600">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         </p>
       </div>
     </div>
