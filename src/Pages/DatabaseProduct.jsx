@@ -24,7 +24,7 @@ const DatabaseProduct = () => {
         const headers = { Authorization: `Bearer ${token}` };
 
         const response = await axios.get(
-          `${API_BASE_URL}/api/admin/get-All-Product`,
+          `${API_BASE_URL}/api/admin/product/get-All-Product`,
           { headers }
         );
 

@@ -91,14 +91,14 @@ const Login = () => {
       let response;
       if (isRegister) {
         if (isAdminRegister) {
-          response = await axios.post('http://localhost:1111/api/admin/register-admin', { 
+          response = await axios.post('http://localhost:1111/api/auth/register-admin', { 
             ...formData, 
             isAdmin: true 
           });
           setPopupMessage('Admin registered successfully!');
         } else {
           // User register API call
-          response = await axios.post('http://localhost:1111/api/user/register-user', {
+          response = await axios.post('http://localhost:1111/api/auth/register-user', {
             ...formData, 
             isAdmin: false
           });
@@ -107,7 +107,7 @@ const Login = () => {
         }
       } else {
         // Login API call
-        response = await axios.post('http://localhost:1111/api/admin/login', {
+        response = await axios.post('http://localhost:1111/api/auth/login', {
           email: formData.email,
           password: formData.password
           
