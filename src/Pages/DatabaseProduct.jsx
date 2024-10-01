@@ -52,7 +52,7 @@ const DatabaseProduct = () => {
       const headers = { Authorization: `Bearer ${token}` };
 
       const response = await axios.post(
-        `${API_BASE_URL}/api/user/add-cart`,
+        `${API_BASE_URL}/api/user/cart/add-cart`,
         {
           productId: product._id,
           quantity: 1,
