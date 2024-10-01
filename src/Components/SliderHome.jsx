@@ -1,5 +1,5 @@
 import React from 'react'
-import slider1_img from "../assets/asset5.png";
+import slider1_img from "../assets/asset11.png";
 import img_plant from "../assets/asset38.png";
 import spin from "../assets/asset4.svg";
   
