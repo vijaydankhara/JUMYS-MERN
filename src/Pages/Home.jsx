@@ -1,5 +1,5 @@
 import React from "react";
-import SliderHome from "../Components/SliderHome";
+import HomeSlider1 from "../Components/HomeSlider1"
 import spin from "../assets/asset4.svg";
 import cup from "../assets/asset16.png";
 import img17 from "../assets/asset17.jpeg";
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <>
       <Top />
-      <SliderHome />
+      <HomeSlider1 />
       <div className="container flex flex-col md:flex-row gap-10 md:gap-20 justify-around items-center h-auto md:h-[500px] p-4">
         <div>
           <div className="flex flex-col md:flex-row items-center w-full md:w-[400px]">

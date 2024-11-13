@@ -27,7 +27,7 @@ const AdminData = () => {
         console.log("Set Token In Header Succes.... ", headers);
 
         const response = await axios.get(
-          `${API_BASE_URL}/api/admin/get-All-Product`,
+          `${API_BASE_URL}/api/admin/product/get-All-Product`,
           { headers }
         );
 

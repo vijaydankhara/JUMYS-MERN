@@ -145,7 +145,11 @@
     line-height:28px;
   color:red;
 }
-
+#home-slider-button:hover {
+  background-color: #ff0000;
+  color: white;
+  transition-duration: 1s;
+}
 
 body, html {
   margin: 0;

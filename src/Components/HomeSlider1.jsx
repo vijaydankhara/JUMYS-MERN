@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import slider1_img from "../assets/asset5.png";
 import img_plant from "../assets/asset38.png";
-import spin from "../assets/asset 4.svg";
+import spin from "../assets/asset4.svg";
 import HomeSlider2 from "./HomeSlider2";
 import HomeSlider3 from "./HomeSlider3";
 import { NavLink,Outlet } from "react-router-dom";

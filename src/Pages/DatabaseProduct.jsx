@@ -11,6 +11,8 @@ const DatabaseProduct = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  console.log("product", products);
+
   // This is a GetAllProducts useEffect
   useEffect(() => {
     const GetAllProducts = async () => {
@@ -46,6 +48,7 @@ const DatabaseProduct = () => {
 
   // ADD TO CART PRODUCT FUNCTION
   const addToCart = async (product) => {
+    console.log("productdata is ===>>> ", product);
     setLoading(true);
     try {
       const token = localStorage.getItem("authToken");
@@ -59,6 +62,7 @@ const DatabaseProduct = () => {
         },
         { headers }
       );
+      console.log("react response add to cart", response);
 
       setMessage("Product added to cart successfully!");
       console.log(response.data);
@@ -79,62 +83,63 @@ const DatabaseProduct = () => {
   return (
     <div className="grid pb-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-10">
       {products.length > 0 ? (
-        products.map((product) => (
-          <div
-            key={product._id}
-            className="relative flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md h-full"
-          >
-            <a
-              href="#"
-              className="relative mx-3 mt-3 flex h-64 overflow-hidden rounded-xl"
+        products.map((products) => {
+          return (
+            <div
+              key={products._id}
+              className="relative flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md h-full"
             >
-              <img
-                src={getImageUrl(product.productImage)}
-                alt={product.title}
-                className="w-full h-full object-cover"
-              />
-              {product.discount && (
-                <span className="absolute m-2 rounded-full bg-black px-2 text-center text-xs font-medium text-white">
-                  {product.discount}% OFF
-                </span>
-              )}
-            </a>
-            <div className="mt-4 px-5 pb-5 flex-grow">
-              <a href="#">
-                <h5 className="text-xl tracking-tight text-slate-900">
-                  {product.title}
-                </h5>
-              </a>
-              <div className="mt-2 mb-5 flex items-center justify-between">
-                <p>
-                  <span className="text-3xl font-bold text-slate-900">
-                    ${product.price}
+              <a
+                href="#"
+                className="relative mx-3 mt-3 flex h-64 overflow-hidden rounded-xl"
+              >
+                <img
+                  src={getImageUrl(products.productImage)}
+                  alt={products.title}
+                  className="w-full h-full object-cover"
+                />
+                {products.discount && (
+                  <span className="absolute m-2 rounded-full bg-black px-2 text-center text-xs font-medium text-white">
+                    {products.discount}% OFF
                   </span>
-                  {product.slashPrice && (
-                    <span className="text-xl text-slate-900 line-through ml-2">
-                      ${product.slashPrice}
+                )}
+              </a>
+              <div className="mt-4 px-5 pb-5 flex-grow">
+                <a href="#">
+                  <h5 className="text-xl tracking-tight text-slate-900">
+                    {products.title}
+                  </h5>
+                </a>
+                <div className="mt-2 mb-5 flex items-center justify-between">
+                  <p>
+                    <span className="text-3xl font-bold text-slate-900">
+                      ${products.price}
                     </span>
-                  )}
-                </p>
-              </div>
+                    {products.slashPrice && (
+                      <span className="text-xl text-slate-900 line-through ml-2">
+                        ${products.slashPrice}
+                      </span>
+                    )}
+                  </p>
+                </div>
 
-              <div>
-                <button
-                  className="bg-[#000] hover:bg-[#ff0000] duration-500 text-white py-2 px-4 rounded-full flex items-center"
-                  onClick={() => addToCart(product)}
-                  disabled={loading}
-                >
-                  <FaShoppingCart className="mr-2" />
-                  {loading ? "Adding..." : "Add To Cart"}
-                </button>
+                <div>
+                  <button
+                    className="bg-[#000] hover:bg-[#ff0000] text-nowrap duration-500 text-white py-2 px-4 rounded-full flex items-center"
+                    onClick={() => addToCart(products._id)}
+                    disabled={loading}
+                  >
+                    <FaShoppingCart className="mr-2" />
+                    {loading ? "Adding..." : "Add To Cart"}
+                  </button>
 
-                {/* Display success or error message */}
-                {message && <p>{message}</p>}
+                  {/* Display success or error message */}
+                  {message && <p>{message}</p>}
+                </div>
               </div>
-              
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <p className="text-[#ff0000] text-3xl font-serif">
           No products found...
